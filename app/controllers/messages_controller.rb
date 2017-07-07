@@ -15,7 +15,9 @@ class MessagesController < ApplicationController
     end
     if @messages.last
       if @messages.last.user_id != current_user.id
-        @messages.last.read = true;
+        @messages.each do |message|
+          message.update(read: 'true')
+        end
       end
     end
     @message = @conversation.messages.new
@@ -30,6 +32,12 @@ class MessagesController < ApplicationController
     if @message.save
       redirect_to conversation_messages_path(@conversation)
     end
+  end
+
+  def destroy
+    @message = @conversation.messages.find(params[:id])
+    @message.destroy
+    redirect_to :back
   end
 
   private
