@@ -5,7 +5,7 @@
   <div class="chat-body clearfix">
     <div class="header">
       <% user = User.find(message.user_id) %>
-      <strong class="primary-font"><%= user.name %> </strong>
+      <strong class="primary-font"><%= user.name %>: </strong><%= message.created_at %>
     </div>
     <p>
       <%= message.body %>
